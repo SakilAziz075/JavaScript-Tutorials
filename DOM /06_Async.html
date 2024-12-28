@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Asyn JS</h1>
+    <button id="stop">stop</button>
+</body>
+
+<script>
+
+    //Using a callback
+    setTimeout( function(){
+        console.log("Hitesh");
+    } , 2000 );     //2000 milliseconds
+
+
+
+    //Using a handler
+    const saySakil = function(){
+        console.log('Sakil')
+    }
+
+    setTimeout(saySakil , 4000);        //saySakil is a handler 
+
+
+    const changeText = function(){
+        document.querySelector('h1').innerHTML='Modifying the Heading '
+        console.log("changing the heading now")
+    }
+    const changeHeading = setTimeout(changeText,5000)
+
+
+
+    //CLEAR-TIME-OUT FUNCITON
+    
+    //The stop button will prevent from changing the heading
+
+    document.querySelector('#stop').addEventListener('click' , function(){
+        clearTimeout(changeHeading)
+        console.log('STOPPED');
+        
+    })
+
+
+
+</script>
+
+</html>
