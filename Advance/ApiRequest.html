@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #2f2f2f;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            padding: 20px;
+        }
+        .card img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+        .card h2 {
+            margin: 15px 0 5px;
+            font-size: 1.5em;
+            color: #333;
+        }
+        .card p {
+            margin: 0;
+            font-size: 1em;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+    0 	UNSENT 	Client has been created. open() not called yet.<br>
+    1 	OPENED 	open() has been called.<br>
+    2 	HEADERS_RECEIVED 	send() has been called, and headers and status are available.<br>
+    3 	LOADING 	Downloading; responseText holds partial data.<br>
+    4 	DONE 	The operation is complete.<br><br>
+
+    <div class="card">
+        <img id="image" src="" alt="Sakil Aziz's Avatar">
+        <h2>Sakil Aziz</h2>
+        <p>Followers: <span id="followers"></span></p>
+    </div>
+
+    <script>
+        const card = document.querySelector('#image');
+        const follower = document.querySelector('#followers');
+
+        const requestURL = 'https://api.github.com/users/SakilAziz075';
+        const xhr = new XMLHttpRequest();
+        let imgURL, followerCount;
+
+        xhr.open('GET', requestURL);
+
+        xhr.onreadystatechange = function () {
+            console.log(xhr.readyState);
+            if (xhr.readyState === 4) {
+                const data = this.responseText;
+
+                // Converting the data to JSON as 'data' has string-data-type
+
+                const JSONdata = JSON.parse(data);
+                console.log(data);
+
+                imgURL = JSONdata.avatar_url;
+                followerCount = JSONdata.followers;
+
+                card.src = imgURL;
+                follower.innerHTML = followerCount;
+            }
+        };
+
+        xhr.send();
+    </script>
+</body>
+
+</html>
+
+
+
